@@ -1,0 +1,13 @@
+  
+steps:
+
+- name: gcr.io/cloud-builders/docker
+  args: [ build, -t, gcr.io/$PROJECT_ID/angular-ci-cd-google-cloud, . ]
+
+- name: gcr.io/cloud-builders/gcloud
+  args: [ compute, instance-groups, managed, rolling-action, restart, angular-ci-cd-google-cloud, --zone=us-east1-b ]
+
+
+images:
+
+- gcr.io/$PROJECT_ID/angular-ci-cd-google-cloud
